@@ -1,0 +1,141 @@
+/* Global styles */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1a1a1a; 
+  color: #ffffff; 
+}
+
+.app {
+  max-height: 100%;
+  width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #2c2c2c; 
+  border: none;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  overflow-y: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+h1, h2 {
+  color: #ff0000;
+}
+
+#addNew {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#addNew:hover {
+  background-color: #e60000; 
+}
+
+.fa-plus {
+  margin-left: 10px;
+}
+
+#exercises {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#exercises div {
+  background-color: #333333; 
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3); 
+}
+
+#exercises div .options {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+#exercises div .options button {
+  padding: 5px 10px; 
+  font-size: 0.8rem; 
+  margin: 0; 
+  transition: all 0.3s ease; 
+  border: none; 
+}
+
+.btn-edit {
+  background-color: #858585; 
+  color: white;
+}
+
+.btn-delete {
+  background-color: #dc3545; 
+  color: white;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  opacity: 0.8; 
+  transform: scale(1.05); 
+}
+
+
+.btn-edit i, .btn-delete i {
+  margin-right: 5px; 
+}
+
+
+#msg {
+  color: #ff0000; 
+}
+
+.modal-content {
+  background-color: #2c2c2c; 
+}
+
+.modal-header, .modal-body, .modal-footer {
+  border-bottom: 1px solid #444; 
+}
+
+.btn-primary {
+  background-color: #ff0000; 
+  border-color: #ff0000;
+}
+
+.btn-primary:hover {
+  background-color: #e60000; 
+}
+
+.btn-secondary {
+  background-color: #6c757d; 
+}
+
+.form-control {
+  background-color: #333333; 
+  color: #ffffff; 
+  border: 1px solid #444444;
+}
+
+.form-control:focus {
+  border-color: #ff0000;
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25);
+}
+
+.label {
+  color: #ffffff; 
+}

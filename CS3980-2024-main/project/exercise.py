@@ -1,0 +1,59 @@
+from fastapi import APIRouter, Path, HTTPException, status
+from model import Exercise, ExerciseRequest 
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
+
+exercise_router = APIRouter()
+
+exercise_list = []
+max_id: int = 0
+
+@exercise_router.post("/exercises", status_code=status.HTTP_201_CREATED)
+async def add_exercise(exercise_request: ExerciseRequest) -> dict:
+    global max_id, exercise_list
+    max_id += 1 
+    # Create a new exercise with the weight attribute
+    new_exercise = Exercise(id=max_id, **exercise_request.dict())
+    exercise_list.append(new_exercise)
+    return JSONResponse(content=jsonable_encoder(new_exercise), status_code=status.HTTP_201_CREATED)
+
+@exercise_router.get("/exercises")
+async def get_exercises() -> dict:
+    return JSONResponse(content=jsonable_encoder(exercise_list))
+
+@exercise_router.get("/exercises/{id}", response_model=Exercise)
+async def get_exercise_by_id(id: int = Path(..., title="The ID of the exercise to get")) -> Exercise:
+    for exercise in exercise_list:
+        if exercise.id == id:
+            return exercise
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Exercise with ID={id} is not found."
+    )
+
+@exercise_router.put("/exercises/{id}", status_code=status.HTTP_200_OK)
+async def update_exercise(id: int, exercise_request: ExerciseRequest) -> dict:
+    global exercise_list
+    for i, exercise in enumerate(exercise_list):
+        if exercise.id == id:
+            # Update the existing exercise
+            updated_exercise = exercise.copy(update=exercise_request.dict())
+            exercise_list[i] = updated_exercise
+            return {"message": "Exercise updated successfully"}
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Exercise with ID={id} is not found."
+    )
+
+@exercise_router.delete("/exercises/{id}", status_code=status.HTTP_200_OK)
+async def delete_exercise(id: int) -> dict:
+    global exercise_list
+    for i, exercise in enumerate(exercise_list):
+        if exercise.id == id:
+            del exercise_list[i]
+            return {"message": f"Exercise with ID={id} has been deleted."}
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Exercise with ID={id} is not found."
+    )
+
