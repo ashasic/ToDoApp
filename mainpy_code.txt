@@ -23,4 +23,3 @@ async def read_index():
 app.include_router(exercise_router)
 
 app.mount("/", StaticFiles(directory="frontend"), name="static")
-
